@@ -1,104 +1,278 @@
-/* CSS Variables for Theme Management */
+/* Ocean Professional Theme Custom Properties */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --ocean-primary: #2563EB;
+  --ocean-secondary: #F59E0B;
+  --ocean-success: #F59E0B;
+  --ocean-error: #EF4444;
+  --ocean-background: #f9fafb;
+  --ocean-surface: #ffffff;
+  --ocean-text-main: #111827;
+  --ocean-gradient-from: #2563EB19;
+  --ocean-gradient-to: #ffffff;
+  --ocean-shadow: 0 2px 16px 0 rgba(37,99,235,0.08);
+  --ocean-round: 16px;
+  --ocean-transition: all 0.2s cubic-bezier(.39,.57,.56,.89);
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --ocean-background: #1e293b;
+  --ocean-surface: #222b3d;
+  --ocean-text-main: #f3f4f6;
+  --ocean-gradient-to: #1e293b;
 }
 
-.App {
+body {
+  background: var(--ocean-background);
+  color: var(--ocean-text-main);
+}
+
+/* Retain project theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 9999;
+  background: var(--ocean-primary);
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 8px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: var(--ocean-shadow);
+  transition: var(--ocean-transition);
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  background: var(--ocean-secondary);
+  color: var(--ocean-text-main);
+}
+
+/* Main container */
+.ttt-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--ocean-gradient-from), var(--ocean-gradient-to));
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+  padding-bottom: 36px;
+}
+
+/* Header */
+.ttt-header {
   text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 22px;
+  margin-bottom: 12px;
+}
+.ttt-title {
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--ocean-primary);
+  margin-bottom: 2px;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, var(--ocean-primary) 70%, var(--ocean-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.ttt-description {
+  color: var(--ocean-text-main);
+  opacity: 0.66;
+  font-size: 1em;
+  margin-bottom: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Board layout */
+.ttt-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  gap: 36px 56px;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 900px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+/* Game section (grid + controls) */
+.ttt-game {
+  background: var(--ocean-surface);
+  border-radius: var(--ocean-round);
+  box-shadow: var(--ocean-shadow);
+  padding: 28px 30px 20px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  min-width: 330px;
+  min-height: 410px;
+  max-width: 95vw;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+/* Board grid itself */
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 18px 0 8px 0;
 }
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+.ttt-board-row {
+  display: flex;
+  gap: 0;
+}
+.ttt-square {
+  background: var(--ocean-gradient-from);
+  border: 2.2px solid var(--ocean-primary);
+  color: var(--ocean-primary);
+  font-weight: 700;
+  font-size: 2.7rem;
+  line-height: 1.15;
+  width: 72px;
+  height: 72px;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  box-shadow: 0 1px 8px 0 rgba(37,99,235,0.06);
+  transition: background 0.2s, border-color 0.23s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.ttt-square:focus, .ttt-square:hover {
+  border-color: var(--ocean-secondary);
+  background: linear-gradient(135deg, #f9fafb, #f6e5bf 97%);
+}
+.ttt-square.highlight {
+  background: linear-gradient(90deg, var(--ocean-secondary) 10%, #fff3 80%);
+  border-color: var(--ocean-secondary);
+  color: var(--ocean-primary);
+  box-shadow: 0 2px 22px 0 #f59e0b33;
+}
+.ttt-square[aria-label*="Empty"] {
+  color: var(--ocean-primary);
+  opacity: 0.34;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Status/Info bar */
+.ttt-status {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: var(--ocean-primary);
+  margin-bottom: 4px;
+}
+.ttt-status--winner span {
+  color: var(--ocean-secondary);
+}
+.ttt-status--draw {
+  color: var(--ocean-error);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+/* Reset button */
+.ttt-reset {
+  margin: 22px auto 6px auto;
+  background: linear-gradient(90deg, var(--ocean-primary) 70%, var(--ocean-secondary) 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 27px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 #2563eb33;
+  transition: var(--ocean-transition);
+  letter-spacing: 0.02em;
+}
+.ttt-reset:hover, .ttt-reset:focus {
+  background: linear-gradient(90deg, var(--ocean-secondary) 60%, var(--ocean-primary));
+  color: var(--ocean-text-main);
+  outline: 2px solid var(--ocean-secondary);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* History panel */
+.ttt-history-panel {
+  margin-top: 22px;
+  min-width: 170px;
+  background: var(--ocean-surface);
+  border-radius: var(--ocean-round);
+  box-shadow: var(--ocean-shadow);
+  padding: 20px 18px 8px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: fit-content;
+}
+.ttt-history-title {
+  font-size: 1.11em;
+  color: var(--ocean-secondary);
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+.ttt-history {
+  margin: 0;
+  padding-left: 20px;
+}
+.ttt-history-btn {
+  background: none;
+  border: none;
+  color: var(--ocean-primary);
+  padding: 2px 0 2px 0;
+  margin-bottom: 3px;
+  font-size: 1em;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 6px;
+  transition: background 0.18s, color 0.18s;
+}
+.ttt-history-btn:hover, .ttt-history-btn.active {
+  background: #2563eb11;
+  color: var(--ocean-secondary);
+  font-weight: 700;
+}
+
+/* Footer */
+.ttt-footer {
+  margin-top: auto;
+  color: var(--ocean-text-main);
+  font-size: 1em;
+  text-align: center;
+  opacity: 0.67;
+  padding-bottom: 18px;
+  letter-spacing: 0.01em;
+}
+.ttt-footer-highlight {
+  color: var(--ocean-primary);
+  font-weight: 800;
+}
+.ttt-footer-amber {
+  color: var(--ocean-secondary);
+  font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 1020px) {
+  .ttt-main {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px 0;
+    max-width: 97vw;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+@media (max-width: 650px) {
+  .ttt-game, .ttt-history-panel {
+    min-width: 98vw;
+    max-width: 98vw;
+    border-radius: 12px;
+    padding: 12px 5vw 14px 5vw;
+  }
+  .ttt-board .ttt-square {
+    width: 18vw;
+    height: 18vw;
+    min-width: 47px;
+    min-height: 47px;
+    font-size: 2.1em;
   }
 }
